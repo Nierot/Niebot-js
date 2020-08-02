@@ -10,15 +10,23 @@ client.on('message', msg => {
     if (!msg.content.startsWith(settings.prefix) || msg.author.bot) return; // If not a command and not send by the bot
     
     const args = msg.content.slice(settings.prefix.length).trim().split(/ +/);
-    const cmd = args.shift().toLowerCase();
+    const cmdName = args.shift().toLowerCase();
 
-    if (!client.commands.has(cmd)) return; // Command does not exist
+    if (!client.commands.has(cmdName)) return; // Command does not exist
+
+    const cmd = client.commands.get(cmdName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
+
+    if (!cmd) return;
+
+    if (cmd.args && !args.length) {
+        msg.reply(`ik mis een aantal argumenten. ${cmd.usage}`);
+    }
 
     try {
-        client.commands.get(cmd).execute(msg, args);
+        cmd.execute(msg, args);
     } catch (error) {
         console.error(error);
-        msg.reply('Lekker bezig, bot is stuk');
+        msg.reply('lekker bezig, bot is stuk');
     }
 });
 
