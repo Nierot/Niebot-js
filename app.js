@@ -40,4 +40,4 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
 });
 
-client.login(settings.token);
+client.login(settings.token_niebotv2);
