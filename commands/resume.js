@@ -6,7 +6,8 @@ module.exports = {
     aliases: ['speel'],
     args: false,
     usage: `${settings.prefix}resume`,
-    execute: (msg, args, client) => {
-        
+    execute: async (msg, args, client) => {
+        msg.reply('sgoe');
+        client.dispatchers[msg.guild.id].resume();
     }
 }
