@@ -1,7 +1,7 @@
 const settings = require('../settings.json');
 
 module.exports = {
-    name: 'resume',
+    name: 'pause',
     description: 'Resumes the player',
     aliases: ['speel'],
     args: false,

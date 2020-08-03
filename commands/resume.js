@@ -7,6 +7,7 @@ module.exports = {
     args: false,
     usage: `${settings.prefix}resume`,
     execute: async (msg, args, client) => {
+        console.log('resume');
         msg.reply('sgoe');
         client.dispatchers[msg.guild.id].resume();
     }

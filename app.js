@@ -1,13 +1,12 @@
 const fs = require('fs');
 const settings = require('./settings.json');
-const YouTube = require('simple-youtube-api');
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('message', msg => {
     if (!msg.content.startsWith(settings.prefix) || msg.author.bot) return; // If not a command and not send by the bot
-    
+
     const args = msg.content.slice(settings.prefix.length).trim().split(/ +/);
     const cmdName = args.shift().toLowerCase();
 
@@ -35,7 +34,6 @@ client.on('ready', () => {
     client.commands = new Discord.Collection();
     client.queue = new Map();
     client.dispatchers = new Map();
-    client.youtube = new YouTube(settings.youtubeApiToken);
 
     fs.readdirSync('./commands').filter(file => file.endsWith('.js')).forEach(file => {
         const command = require(`./commands/${file}`);
