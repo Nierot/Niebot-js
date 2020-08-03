@@ -16,7 +16,7 @@ client.on('message', msg => {
 
     if (!cmd) return;
 
-    if (cmd.args && !args.length || args.length != cmd.args_length) {
+    if (cmd.args && !args.length || args.length > cmd.args_length) {
         return msg.reply(`ik mis een aantal argumenten. ${cmd.usage}`);
     }
 
@@ -33,6 +33,8 @@ client.on('message', msg => {
 client.on('ready', () => {
     client.commands = new Discord.Collection();
     client.queue = new Map();
+    client.dispatchers = new Map();
+
     fs.readdirSync('./commands').filter(file => file.endsWith('.js')).forEach(file => {
         const command = require(`./commands/${file}`);
         client.commands.set(command.name, command);
