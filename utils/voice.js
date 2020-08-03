@@ -8,7 +8,19 @@ module.exports = {
         return await msg.member.voice.channel.join();
     },
 
+    /**
+     * Leaves the voice channel
+     */
     leave: async msg => {
         await msg.guild.voice.channel.leave();
+    },
+
+    /**
+     * Leaves the voice channel and destroys the dispatcher
+     */
+    finish: (msg, dispatcher) => {
+        console.log('finished playing')
+        this.leave(msg);
+        dispatcher.destroy();
     }
 }
