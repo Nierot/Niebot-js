@@ -19,11 +19,11 @@ client.on('message', msg => {
     if (!cmd) return;
 
     if (cmd.args && !args.length) {
-        msg.reply(`ik mis een aantal argumenten. ${cmd.usage}`);
+        return msg.reply(`ik mis een aantal argumenten. ${cmd.usage}`);
     }
 
     try {
-        cmd.execute(msg, args);
+        cmd.execute(msg, args, client);
     } catch (error) {
         console.error(error);
         msg.reply('lekker bezig, bot is stuk');
