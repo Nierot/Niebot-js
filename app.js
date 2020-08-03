@@ -3,8 +3,6 @@ const settings = require('./settings.json');
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
-client.commands = new Discord.Collection();
-
 
 client.on('message', msg => {
     if (!msg.content.startsWith(settings.prefix) || msg.author.bot) return; // If not a command and not send by the bot
@@ -18,7 +16,7 @@ client.on('message', msg => {
 
     if (!cmd) return;
 
-    if (cmd.args && !args.length) {
+    if (cmd.args && !args.length || args.length != cmd.args_length) {
         return msg.reply(`ik mis een aantal argumenten. ${cmd.usage}`);
     }
 
@@ -33,6 +31,8 @@ client.on('message', msg => {
 
 // Login and initialize
 client.on('ready', () => {
+    client.commands = new Discord.Collection();
+    client.queue = new Map();
     fs.readdirSync('./commands').filter(file => file.endsWith('.js')).forEach(file => {
         const command = require(`./commands/${file}`);
         client.commands.set(command.name, command);
