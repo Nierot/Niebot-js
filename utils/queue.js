@@ -13,5 +13,15 @@ module.exports = {
         }
 
         console.log(`${user} added ${link} of type ${type} to the ${guild} queue`);
+    },
+
+    getAndRemoveFirst: (guild, client) => {
+        return new Promise((resolve, reject) => {
+            if (!client.queue[guild] || client.queue[guild].length === 0) {
+                reject('Queue is empty');
+            } else {
+                resolve(client.queue[guild].shift());
+            }
+        })
     }
 }
