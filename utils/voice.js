@@ -25,14 +25,6 @@ module.exports = {
     },
 
     /**
-     * Skips the current song
-     */
-    skip: (msg, client) => {
-        //TODO
-    },
-
-
-    /**
      * Returns a boolean if the bot is playing music in the given context
      */
     playing: (msg, client) => {
