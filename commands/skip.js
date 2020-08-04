@@ -1,6 +1,7 @@
 const settings = require('../settings.json');
 const youtube = require('./youtube');
 const queue = require('../utils/queue');
+const voice = require('../utils/voice');
 
 module.exports = {
     name: 'skip',
@@ -11,6 +12,9 @@ module.exports = {
         let song = undefined;
         queue.getAndRemoveFirst(msg.guild.id, client)
             .then(async song => await youtube.execute(msg, [song.link] , client))
-            .catch(err => msg.channel.send(err));
+            .catch(async err => {
+                await msg.channel.send(err);
+                await voice.leave(msg);
+            });
     }
 }
