@@ -17,8 +17,9 @@ module.exports = {
         let music = previousSong ? undefined : previousSong;
         let repeat = args[1] ? true : false
         let guild = msg.guild.id;
-        
-        console.log('[YOUTUBE] ' + args[0])
+
+        client.user.setPresence({ activity: { name: 'with discord.js' } })
+            .catch(console.error);
 
         if (!music) {
             await ytdl(args[0])
