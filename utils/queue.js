@@ -20,7 +20,6 @@ module.exports = {
 
     getAndRemoveFirst: (guild, client) => {
         return new Promise((resolve, reject) => {
-            console.log(client.queue[guild])
             if (!client.queue[guild] || client.queue[guild].length === 0) {
                 reject('Queue is empty');
             } else {

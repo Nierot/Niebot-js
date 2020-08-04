@@ -2,12 +2,11 @@ const settings = require('../settings.json');
 
 module.exports = {
     name: 'resume',
-    description: 'Resumes the player',
+    description: 'Laat de herrie weer spelen',
     aliases: ['speel'],
     args: false,
     usage: `${settings.prefix}resume`,
     execute: async (msg, args, client) => {
-        console.log('resume');
         msg.reply('sgoe');
         client.dispatchers[msg.guild.id].resume();
     }

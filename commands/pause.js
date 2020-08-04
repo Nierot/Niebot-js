@@ -2,7 +2,7 @@ const settings = require('../settings.json');
 
 module.exports = {
     name: 'pause',
-    description: 'Resumes the player',
+    description: 'Pauzeert de herrie',
     aliases: ['speel'],
     args: false,
     usage: `${settings.prefix}resume`,

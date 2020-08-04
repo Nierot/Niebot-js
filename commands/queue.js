@@ -1,6 +1,7 @@
 const queue = require('../utils/queue');
 const settings = require('../settings.json');
 const youtube = require('./youtube');
+const voice = require('../utils/voice');
 
 const types = [
     'playlist',
@@ -26,6 +27,9 @@ module.exports = {
             first = await queue.queue(args[0], args[1], msg.author.id, msg.guild.id, client);
         }
 
-        await youtube.execute(msg, [first.link], client);
+        if (!voice.playing(msg, client)) {
+            client.queue[msg.guild.id].shift(); // Remove first from queue
+            await youtube.execute(msg, [first.link], client);
+        }
     }
 }
