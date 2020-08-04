@@ -20,7 +20,22 @@ module.exports = {
      */
     finish: (msg, dispatcher) => {
         console.log('finished playing')
-        this.leave(msg);
+        module.exports.leave(msg);
         dispatcher.destroy();
+    },
+
+    /**
+     * Skips the current song
+     */
+    skip: (msg, client) => {
+        //TODO
+    },
+
+
+    /**
+     * Returns a boolean if the bot is playing music in the given context
+     */
+    playing: (msg, client) => {
+        return !!client.dispatchers[msg.guild.id]; // Deze syntax moeten we koesteren (!! cast m naar een bool)
     }
 }

@@ -1,5 +1,6 @@
 const queue = require('../utils/queue');
 const settings = require('../settings.json');
+const youtube = require('./youtube');
 
 const types = [
     'playlist',
@@ -14,8 +15,17 @@ module.exports = {
     args: true,
     args_length: 2,
     usage: usage,
-    execute: (msg, args, client) => {
+    execute: async (msg, args, client) => {
         if (!types.includes(args[0])) return msg.reply(usage)
-        queue.queue(args[0], args[1], msg.author.id, msg.guild.id, client);
+        
+        let first = undefined;
+
+        if (args[0] === 'playlist') {
+            first = await queue.queuePlaylist(args[1], msg.author.id, msg.guild.id, client);
+        } else {
+            first = await queue.queue(args[0], args[1], msg.author.id, msg.guild.id, client);
+        }
+
+        await youtube.execute(msg, [first.link], client);
     }
 }
