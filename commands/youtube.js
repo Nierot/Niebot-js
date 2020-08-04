@@ -18,8 +18,11 @@ module.exports = {
         let repeat = args[1] ? true : false
         let guild = msg.guild.id;
 
-        client.user.setPresence({ activity: { name: 'with discord.js' } })
-            .catch(console.error);
+        youtube.getTitleFromVideo(args[0])
+            .then(name => {
+                client.user.setPresence({ activity: { name: name } })
+                    .catch(console.error);
+        })
 
         if (!music) {
             await ytdl(args[0])
