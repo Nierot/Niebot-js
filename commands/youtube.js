@@ -25,7 +25,7 @@ module.exports = {
         })
 
         if (!music) {
-            await ytdl(args[0])
+            await ytdl(args[0], { quality: 'highestaudio' })
                 .then(song => music = song)
                 .catch(err => msg.channel.send('Dat is niet een youtube video'))
         }

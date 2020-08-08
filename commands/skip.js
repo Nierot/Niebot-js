@@ -9,7 +9,6 @@ module.exports = {
     args: false,
     usage: `${settings.prefix}skip`,
     execute: async (msg, args, client) => {
-        let song = undefined;
         queue.getAndRemoveFirst(msg.guild.id, client)
             .then(async song => await youtube.execute(msg, [song.link] , client))
             .catch(async err => {
